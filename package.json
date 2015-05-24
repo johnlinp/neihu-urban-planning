@@ -1,0 +1,30 @@
+{
+  "name": "neihu-urban-planning",
+  "version": "0.0.1",
+  "description": "臺北市內湖區都市計畫通盤檢討（主要計畫）案",
+  "private": true,
+  "devDependencies": {
+    "gitbook": "^1.5.0",
+    "google-spreadsheet-download": "*",
+    "gulp": "^3.8.10",
+    "gulp-gh-pages": "^0.4.0"
+  },
+  "scripts": {
+    "republish": "npm run republish:lexicon && npm run republish:glossary",
+    "republish:lexicon": "google-spreadsheet-download 11T9f4IswQ2eru-8HBGUbnVcM0cskTExoNOOG-xtGq4M 1 > lexicon.json",
+    "republish:glossary": "node -e 'JSON.parse(require(\"fs\").readFileSync(\"lexicon.json\")).map(function(d){if(d[\"title\"]&&d[\"definition\"]){console.log(\"\\n# \"+d[\"title\"]+\"\\n\"+d[\"definition\"].trim().replace(/\\n{2,}/g,\"\\n\"))}})' > GLOSSARY.md",
+    "postinstall": "gitbook install .",
+    "test": "npm run build",
+    "build": "gitbook build .",
+    "serve": "gitbook serve .",
+    "deploy": "gulp deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g0v/telework-gitbook.git"
+  },
+  "bugs": {
+    "url": "https://github.com/g0v/telework-gitbook/issues"
+  },
+  "homepage": "https://github.com/g0v/telework-gitbook"
+}
